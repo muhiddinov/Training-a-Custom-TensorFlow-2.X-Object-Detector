@@ -1,0 +1,56 @@
+2021-01-30 06:49:47.248543: I tensorflow/core/common_runtime/bfc_allocator.cc:1002] Sum Total of in-use chunks: 1.34GiB
+2021-01-30 06:49:47.252691: I tensorflow/core/common_runtime/bfc_allocator.cc:1004] total_region_allocated_bytes_: 1444534528 memory_limit_: 1444534681 available bytes: 153 curr_region_allocation_bytes_: 2889069568
+2021-01-30 06:49:47.262055: I tensorflow/core/common_runtime/bfc_allocator.cc:1010] Stats:
+Limit:                  1444534681
+InUse:                  1441318912
+MaxInUse:               1441936896
+NumAllocs:                    5855
+MaxAllocSize:            988413952
+
+2021-01-30 06:49:47.274017: W tensorflow/core/common_runtime/bfc_allocator.cc:439] **********************************************************************************************x*****
+2021-01-30 06:49:47.283749: W tensorflow/core/framework/op_kernel.cc:1753] OP_REQUIRES failed at depthwise_conv_op.cc:376 : Resource exhausted: OOM when allocating tensor with shape[6,128,40,40] and type float on /job:localhost/replica:0/task:0/device:GPU:0 by allocator GPU_0_bfc
+Traceback (most recent call last):
+  File "model_main_tf2.py", line 113, in <module>
+    tf.compat.v1.app.run()
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\platform\app.py", line 40, in run
+    _run(main=main, argv=argv, flags_parser=_parse_flags_tolerate_undef)
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\absl\app.py", line 303, in run
+    _run_main(main, args)
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\absl\app.py", line 251, in _run_main
+    sys.exit(main(argv))
+  File "model_main_tf2.py", line 104, in main
+
+    model_lib_v2.train_loop(
+  File "C:\ProgramData\Anaconda3\lib\site-packages\object_detection-0.1-py3.8.egg\object_detection\model_lib_v2.py", line 636, in train_loop
+    loss = _dist_train_step(train_input_iter)
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\def_function.py", line 580, in __call__
+    result = self._call(*args, **kwds)
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\def_function.py", line 644, in _call
+    return self._stateless_fn(*args, **kwds)
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\function.py", line 2420, in __call__
+    return graph_function._filtered_call(args, kwargs)  # pylint: disable=protected-access
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\function.py", line 1661, in _filtered_call
+    return self._call_flat(
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\function.py", line 1745, in _call_flat
+    return self._build_call_outputs(self._inference_function.call(
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\function.py", line 593, in call
+    outputs = execute.execute(
+  File "C:\Users\AKA\AppData\Roaming\Python\Python38\site-packages\tensorflow\python\eager\execute.py", line 59, in quick_execute
+    tensors = pywrap_tfe.TFE_Py_Execute(ctx._handle, device_name, op_name,
+tensorflow.python.framework.errors_impl.ResourceExhaustedError: 2 root error(s) found.
+  (0) Resource exhausted:  OOM when allocating tensor with shape[6,128,80,80] and type float on /job:localhost/replica:0/task:0/device:GPU:0 by allocator GPU_0_bfc
+         [[node WeightSharedConvolutionalBoxPredictor/PredictionTower/conv2d_1/separable_conv2d (defined at ProgramData\Anaconda3\lib\site-packages\object_detection-0.1-py3.8.egg\object_detection\predictors\convolutional_keras_box_predictor.py:461) ]]
+Hint: If you want to see a list of allocated tensors when OOM happens, add report_tensor_allocations_upon_oom to RunOptions for current allocation info.
+
+         [[Func/Loss/classification_loss_1/write_summary/summary_cond/then/_10/input/_83/_212]]
+Hint: If you want to see a list of allocated tensors when OOM happens, add report_tensor_allocations_upon_oom to RunOptions for current allocation info.
+
+  (1) Resource exhausted:  OOM when allocating tensor with shape[6,128,80,80] and type float on /job:localhost/replica:0/task:0/device:GPU:0 by allocator GPU_0_bfc
+         [[node WeightSharedConvolutionalBoxPredictor/PredictionTower/conv2d_1/separable_conv2d (defined at ProgramData\Anaconda3\lib\site-packages\object_detection-0.1-py3.8.egg\object_detection\predictors\convolutional_keras_box_predictor.py:461) ]]
+Hint: If you want to see a list of allocated tensors when OOM happens, add report_tensor_allocations_upon_oom to RunOptions for current allocation info.
+
+0 successful operations.
+0 derived errors ignored. [Op:__inference__dist_train_step_45153]
+
+Function call stack:
+_dist_train_step -> _dist_train_step
